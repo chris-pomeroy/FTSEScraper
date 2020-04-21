@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 public class FtseScraperApplication {
