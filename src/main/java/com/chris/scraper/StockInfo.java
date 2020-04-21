@@ -15,7 +15,8 @@ public class StockInfo {
 	public StockInfo(String ticker, String s) {
 		this.ticker = ticker;
 		String[] lines = s.split("\n");
-		recent = new BigDecimal(lines[lines.length-1].split(",")[1]);
+		String r = lines[lines.length-1].split(",")[1];
+		recent = new BigDecimal(r);
 		BigDecimal rows = BigDecimal.ZERO;
 		BigDecimal sum = BigDecimal.ZERO;
 		for (int c = 1; c < lines.length; c++) {
@@ -26,7 +27,7 @@ public class StockInfo {
 				rows = rows.add(BigDecimal.ONE);
 			}
 		}
-		average = sum.divide(rows);
+		average = sum.divide(rows, RoundingMode.HALF_UP);
 	}
 	
 	public BigDecimal percentage() {
