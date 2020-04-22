@@ -29,7 +29,7 @@ public class FtseScraperApplication {
 		
 		List<StockInfo> stocks = new ArrayList<>(ftse.size());
 		for (String ticker : ftse) {
-			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1555804800&period2=1587427200&interval=1wk&events=history";
+			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1555804800&period2=1587600000&interval=1d&events=history";
 			try {
 				stocks.add(new StockInfo(ticker, rest.getForEntity(url, String.class).getBody()));
 			}
@@ -39,7 +39,7 @@ public class FtseScraperApplication {
 		}
 		
 		stocks.sort((s1, s2) -> s1.percentage().compareTo(s2.percentage()));
-		stocks.forEach(s -> System.out.println(s));
+		stocks.forEach(System.out::println);
 		System.out.println(stocks.size() + " total results");
 	}
 	
