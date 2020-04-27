@@ -15,7 +15,7 @@ public class FtseScraperApplication {
 		
 		RestTemplate rest = new RestTemplate();
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(FtseScraperApplication.class.getResourceAsStream("/ftse250.csv")));
+		BufferedReader br = new BufferedReader(new InputStreamReader(FtseScraperApplication.class.getResourceAsStream("/stocks.csv")));
 		List<String> ftse = br.lines().collect(Collectors.toList());
 		br.close();
 		
