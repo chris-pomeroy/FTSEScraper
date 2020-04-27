@@ -15,8 +15,7 @@ public class StockInfo {
 	public StockInfo(String ticker, String s) {
 		this.ticker = ticker;
 		String[] lines = s.split("\n");
-		String r = lines[lines.length-1].split(",")[1];
-		recent = new BigDecimal(r);
+		recent = new BigDecimal(lines[lines.length-1].split(",")[1]);
 		BigDecimal rows = BigDecimal.ZERO;
 		BigDecimal sum = BigDecimal.ZERO;
 		for (int c = 1; c < lines.length; c++) {

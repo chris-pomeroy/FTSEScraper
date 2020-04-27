@@ -21,7 +21,7 @@ public class FtseScraperApplication {
 		
 		List<StockInfo> stocks = new ArrayList<>(ftse.size());
 		for (String ticker : ftse) {
-			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1555804800&period2=1587600000&interval=1d&events=history";
+			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1556064000&period2=1588032000&interval=1d&events=history";
 			try {
 				stocks.add(new StockInfo(ticker, rest.getForEntity(url, String.class).getBody()));
 			}
