@@ -20,18 +20,25 @@ public class FtseScraperApplication {
 		br.close();
 		
 		List<StockInfo> stocks = new ArrayList<>(ftse.size());
+		List<String> exceptions = new ArrayList<String>();
 		for (String ticker : ftse) {
-			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1556064000&period2=1588032000&interval=1d&events=history";
+			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1556064000&period2=1591660800&interval=1d&events=history";
 			try {
 				stocks.add(new StockInfo(ticker, rest.getForEntity(url, String.class).getBody()));
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				exceptions.add(ticker);
 			}
 		}
 		stocks.sort((s1, s2) -> s1.percentage().compareTo(s2.percentage()));
+		System.out.println("------------------------");
 		stocks.forEach(System.out::println);
 		System.out.println(stocks.size() + " total results");
+		System.out.println("------------------------");
+		System.out.println("The following shares were not found: ");
+		exceptions.forEach(System.out::println);
+		System.out.println("------------------------");
+		System.out.println("WARNING: Ensure period1 and period2 are updated");
 	}
 	
 }
