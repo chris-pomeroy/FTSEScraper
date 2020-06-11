@@ -40,5 +40,4 @@ public class StockInfo {
 	public String toString() {
 		return ticker + ": trading at " + percentage() + "%";
 	}
-
 }

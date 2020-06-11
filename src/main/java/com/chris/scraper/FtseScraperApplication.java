@@ -3,6 +3,8 @@ package com.chris.scraper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,8 +23,9 @@ public class FtseScraperApplication {
 		
 		List<StockInfo> stocks = new ArrayList<>(ftse.size());
 		List<String> exceptions = new ArrayList<String>();
+		long tomorrow = LocalDate.now().atStartOfDay().plusDays(1).toEpochSecond(ZoneOffset.UTC);
 		for (String ticker : ftse) {
-			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1556064000&period2=1591660800&interval=1d&events=history";
+			String url = "https://query1.finance.yahoo.com/v7/finance/download/" + ticker + ".L?period1=1556064000&period2=" + tomorrow + "&interval=1d&events=history";
 			try {
 				stocks.add(new StockInfo(ticker, rest.getForEntity(url, String.class).getBody()));
 			}
@@ -38,7 +41,6 @@ public class FtseScraperApplication {
 		System.out.println("The following shares were not found: ");
 		exceptions.forEach(System.out::println);
 		System.out.println("------------------------");
-		System.out.println("WARNING: Ensure period1 and period2 are updated");
 	}
 	
 }
