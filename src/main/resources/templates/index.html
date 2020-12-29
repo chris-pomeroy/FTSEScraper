@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+    </head>
+    <body>
+    <table>
+        <tr th:each="stock: ${stocks}">
+            <td th:text="${stock.getTicker()}" />
+            <td th:text="${stock.getAverage()}" />
+            <td th:text="${stock.getRecent()}" />
+            <td th:text="${stock.getPercentage() + '%'}" />
+        </tr>
+    </table>
+    </body>
+</html>
