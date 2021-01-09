@@ -29,6 +29,7 @@ public class StockController {
 
 	@GetMapping("/")
 	public ModelAndView getRoot() {
-		return new ModelAndView("index", "stocks", stockService.getStocks());
+		return new ModelAndView("index", "stocks", stockService.getStocks())
+				.addObject("lastUpdated", stockService.getLastUpdated());
 	}
 }
